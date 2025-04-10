@@ -3,30 +3,31 @@ import { useState } from "react";
 
 function Main({ movies }) {
 
-    const [selectCategory, setSelectCategory] = useState("");
-
+    const [selectGenre, setSelectGenre] = useState("");
+    const [filteredMovies, setFilteredMovies] = useState(movies);
 
     useEffect(() => {
-        const selectedMovies = movies;
-        if (selectCategory !== "") {
-
+        console.log("montato");
+        let selectedMovies = movies;
+        if (selectGenre !== "") {
+            selectedMovies = movies.filter(movie => movie.genre === selectGenre);
         }
+        setFilteredMovies(selectedMovies);
 
-
-    }, [selectCategory])
+    }, [selectGenre])
 
     return <main>
         <div className="select-container">
-            <select onChange={(e) => setSelectCategory(e.target.value)}>
+            <select onChange={(e) => setSelectGenre(e.target.value)}>
                 <option value="">Categories</option>
-                <option value={selectCategory}>Fantascienza</option>
-                <option value={selectCategory}>Thriller</option>
-                <option value={selectCategory}>Azione</option>
-                <option value={selectCategory}>Romantico</option>
+                <option >Fantascienza</option>
+                <option >Thriller</option>
+                <option >Azione</option>
+                <option>Romantico</option>
             </select>
         </div>
         <div className="movies-container">
-            {movies.map((movie, i) => {
+            {filteredMovies.map((movie, i) => {
                 return <div key={i} className="movie">
                     <h2>{movie.title}</h2>
                     <h3>{movie.genre}</h3>
