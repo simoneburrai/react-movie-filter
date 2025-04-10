@@ -4,6 +4,9 @@
     box-sizing: border-box;
 }
 
+button {
+    cursor: pointer;
+}
 
 header {
     background-color: aliceblue;
@@ -51,6 +54,25 @@ header {
     color: white;
     padding: 20px;
     border-radius: 20px;
+    position: relative;
+}
+
+.movie .remove-button {
+    position: absolute;
+    padding: 10px;
+    top: 10px;
+    right: 10px;
+    border: 0px;
+    border-radius: 15px;
+    background-color: lightcoral;
+    color: white;
+    font-size: 20px;
+    font-weight: bolder;
+    display: none;
+}
+
+.movie:hover .remove-button {
+    display: block;
 }
 
 .movie h2 {

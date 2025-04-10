@@ -10,6 +10,7 @@ function Main({ movies }) {
     const [createdTitle, setCreatedTitle] = useState("");
     const [createdGenre, setCreatedGenre] = useState("");
 
+
     const onCreatingMovie = (e) => {
         e.preventDefault();
         const newMovie = {
@@ -18,6 +19,16 @@ function Main({ movies }) {
         }
         setAllMovies([...allMovies, newMovie]);
     }
+
+    const removingFunction = (id) => {
+        if (id != null) {
+            setAllMovies((prev => {
+                return prev = prev.filter((_, index) => index != id)
+            }
+            ))
+        } else return;
+    }
+
 
     useEffect(() => {
         let selectedMovies = allMovies;
@@ -45,7 +56,7 @@ function Main({ movies }) {
                 <input placeholder="Ricerca per Titolo" onChange={(e) => setInputSearch(e.target.value)} type="text" />
             </form>
             <div className="select-container">
-                <select onChange={(e) => setSelectGenre(e.target.value)}>
+                <select value={selectGenre} onChange={(e) => setSelectGenre(e.target.value)}>
                     <option value="">Categories</option>
                     <option >Fantascienza</option>
                     <option >Thriller</option>
@@ -59,6 +70,9 @@ function Main({ movies }) {
                 return <div key={i} className="movie">
                     <h2>{movie.title}</h2>
                     <h3>{movie.genre}</h3>
+                    <button onClick={() => removingFunction(i)} className="remove-button">
+                        x
+                    </button>
                 </div>
             })}
         </div>
