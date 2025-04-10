@@ -9,19 +9,22 @@ function Main({ movies }) {
 
     const onSubmitSearch = (e => {
         e.preventDefault();
-        const searchedMovies = filteredMovies.filter(movie => movie.title.includes(inputSearch));
-        setFilteredMovies(searchedMovies);
+        let searchedMovies = movies;
+        if (inputSearch != "") {
+            searchedMovies = (movies.filter(movie => movie.title.includes(inputSearch)));
+        }
         console.log(searchedMovies);
+        setFilteredMovies(searchedMovies);
     })
 
     useEffect(() => {
-        let selectedMovies = movies;
+        let selectedMovies = movies
         if (selectGenre !== "") {
             selectedMovies = movies.filter(movie => movie.genre === selectGenre);
         }
         setFilteredMovies(selectedMovies);
 
-    }, [selectGenre, filteredMovies])
+    }, [selectGenre])
 
 
     return <main>
