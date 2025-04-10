@@ -5,18 +5,30 @@ function Main({ movies }) {
 
     const [selectGenre, setSelectGenre] = useState("");
     const [filteredMovies, setFilteredMovies] = useState(movies);
+    const [inputSearch, setInputSearch] = useState("");
+
+    const onSubmitSearch = (e => {
+        e.preventDefault();
+        const searchedMovies = filteredMovies.filter(movie => movie.title.includes(inputSearch));
+        setFilteredMovies(searchedMovies);
+        console.log(searchedMovies);
+    })
 
     useEffect(() => {
-        console.log("montato");
         let selectedMovies = movies;
         if (selectGenre !== "") {
             selectedMovies = movies.filter(movie => movie.genre === selectGenre);
         }
         setFilteredMovies(selectedMovies);
 
-    }, [selectGenre])
+    }, [selectGenre, filteredMovies])
+
 
     return <main>
+        <form onSubmit={onSubmitSearch} className="form-search">
+            <input onChange={(e) => setInputSearch(e.target.value)} type="text" />
+            <button>Search</button>
+        </form>
         <div className="select-container">
             <select onChange={(e) => setSelectGenre(e.target.value)}>
                 <option value="">Categories</option>
