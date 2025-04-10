@@ -5,7 +5,7 @@ function Main({ movies }) {
 
     const [selectGenre, setSelectGenre] = useState("");
     const [allMovies, setAllMovies] = useState(movies);
-    const [filteredMovies, setFilteredMovies] = useState(movies);
+    const [filteredMovies, setFilteredMovies] = useState(allMovies);
     const [inputSearch, setInputSearch] = useState("");
     const [createdTitle, setCreatedTitle] = useState("");
     const [createdGenre, setCreatedGenre] = useState("");
@@ -18,29 +18,22 @@ function Main({ movies }) {
         }
         setAllMovies([...allMovies, newMovie]);
     }
-    const onSubmitSearch = (e => {
-        e.preventDefault();
-        let searchedMovies = filteredMovies;
-        if (inputSearch != "") {
-            searchedMovies = (filteredMovies.filter(movie => movie.title.includes(inputSearch)));
-        }
-        console.log(searchedMovies);
-        setFilteredMovies(searchedMovies);
-    })
 
     useEffect(() => {
         let selectedMovies = allMovies;
+        if (inputSearch != "") {
+            selectedMovies = (allMovies.filter(movie => movie.title.includes(inputSearch)));
+        }
         if (selectGenre !== "") {
-            selectedMovies = allMovies.filter(movie => movie.genre === selectGenre);
+            selectedMovies = selectedMovies.filter(movie => movie.genre === selectGenre);
         }
         setFilteredMovies(selectedMovies);
-    }, [selectGenre, allMovies])
+    }, [selectGenre, allMovies, inputSearch])
 
 
     return <main>
-        <form onSubmit={onSubmitSearch} className="form-search">
+        <form className="form-search">
             <input onChange={(e) => setInputSearch(e.target.value)} type="text" />
-            <button>Search</button>
         </form>
         <div className="select-container">
             <select onChange={(e) => setSelectGenre(e.target.value)}>
