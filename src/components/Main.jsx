@@ -4,26 +4,36 @@ import { useState } from "react";
 function Main({ movies }) {
 
     const [selectGenre, setSelectGenre] = useState("");
+    const [allMovies, setMoviesAndCreatedMovies] = useState(movies);
     const [filteredMovies, setFilteredMovies] = useState(movies);
     const [inputSearch, setInputSearch] = useState("");
+    const [createdTitle, setCreatedTitle] = useState("");
+    const [createdGenre, setCreatedGenre] = useState("");
 
+    const onCreatingMovie = (e) => {
+        e.preventDefault();
+        const newMovie = {
+            "title": createdTitle,
+            "genre": createdGenre
+        }
+        setFilteredMovies([...allMovies, newMovie]);
+    }
     const onSubmitSearch = (e => {
         e.preventDefault();
-        let searchedMovies = movies;
+        let searchedMovies = filteredMovies;
         if (inputSearch != "") {
-            searchedMovies = (movies.filter(movie => movie.title.includes(inputSearch)));
+            searchedMovies = (filteredMovies.filter(movie => movie.title.includes(inputSearch)));
         }
         console.log(searchedMovies);
         setFilteredMovies(searchedMovies);
     })
 
     useEffect(() => {
-        let selectedMovies = movies
+        let selectedMovies = allMovies;
         if (selectGenre !== "") {
-            selectedMovies = movies.filter(movie => movie.genre === selectGenre);
+            selectedMovies = allMovies.filter(movie => movie.genre === selectGenre);
         }
         setFilteredMovies(selectedMovies);
-
     }, [selectGenre])
 
 
@@ -49,6 +59,13 @@ function Main({ movies }) {
                 </div>
             })}
         </div>
+        <form onSubmit={onCreatingMovie} className="add-movie">
+            <label>Insert Title</label>
+            <input value={createdTitle} onChange={(e) => setCreatedTitle(e.target.value)} />
+            <label>Insert Genre</label>
+            <input value={createdGenre} onChange={(e) => setCreatedGenre(e.target.value)} />
+            <button>Aggiungi</button>
+        </form>
     </main>
 }
 
