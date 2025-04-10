@@ -4,7 +4,7 @@ import { useState } from "react";
 function Main({ movies }) {
 
     const [selectGenre, setSelectGenre] = useState("");
-    const [allMovies, setMoviesAndCreatedMovies] = useState(movies);
+    const [allMovies, setAllMovies] = useState(movies);
     const [filteredMovies, setFilteredMovies] = useState(movies);
     const [inputSearch, setInputSearch] = useState("");
     const [createdTitle, setCreatedTitle] = useState("");
@@ -16,7 +16,7 @@ function Main({ movies }) {
             "title": createdTitle,
             "genre": createdGenre
         }
-        setFilteredMovies([...allMovies, newMovie]);
+        setAllMovies([...allMovies, newMovie]);
     }
     const onSubmitSearch = (e => {
         e.preventDefault();
@@ -34,7 +34,7 @@ function Main({ movies }) {
             selectedMovies = allMovies.filter(movie => movie.genre === selectGenre);
         }
         setFilteredMovies(selectedMovies);
-    }, [selectGenre])
+    }, [selectGenre, allMovies])
 
 
     return <main>
