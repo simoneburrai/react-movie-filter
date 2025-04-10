@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+header {
+    background-color: aliceblue;
+    padding: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 30px;
+}
+
+
+.inputs-container {
+    display: flex;
+    background-color: darkcyan;
+    padding: 20px;
+    justify-content: center;
+    gap: 30px;
+    align-items: center;
+}
+
+.form-search input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 0px;
+}
+
+.select-container select {
+    border: 0px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.movies-container {
+    margin: 60px 100px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.movie {
+    background-color: cornflowerblue;
+    text-align: center;
+    width: calc((100% - 150px) / 4);
+    color: white;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.movie h2 {
+    margin-bottom: 10px;
+}
+
+.add-movie {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 20%;
+}
+
+.add-movie h2 {
+    font-size: 25px;
+    text-transform: uppercase;
+    text-align: center;
+    color: darkcyan;
+    margin-bottom: 30px;
+}
+
+.add-movie input {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 0px;
+    background-color: aliceblue
+}
+
+.add-movie label {
+    font-size: 15px;
+    font-style: italic;
+
+}
+
+.create-input-container {
+    text-align: center;
+    margin: 10px;
+}
+
+.add-movie button {
+    background-color: cornflowerblue;
+    padding: 20px;
+    font-size: 20px;
+    color: white;
+    border: 0px;
+    border-radius: 15px;
+    margin-top: 15px;
+}

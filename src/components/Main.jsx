@@ -21,8 +21,16 @@ function Main({ movies }) {
 
     useEffect(() => {
         let selectedMovies = allMovies;
+
         if (inputSearch != "") {
-            selectedMovies = (allMovies.filter(movie => movie.title.includes(inputSearch)));
+            const lowerCaseSearch = inputSearch.toLowerCase()
+            selectedMovies = (allMovies.filter(movie => {
+                const movieTitle = movie.title;
+                const lowerCaseTitle = movieTitle.toLowerCase();
+                if (lowerCaseTitle.includes(lowerCaseSearch)) {
+                    return movie;
+                }
+            }));
         }
         if (selectGenre !== "") {
             selectedMovies = selectedMovies.filter(movie => movie.genre === selectGenre);
@@ -32,17 +40,19 @@ function Main({ movies }) {
 
 
     return <main>
-        <form className="form-search">
-            <input onChange={(e) => setInputSearch(e.target.value)} type="text" />
-        </form>
-        <div className="select-container">
-            <select onChange={(e) => setSelectGenre(e.target.value)}>
-                <option value="">Categories</option>
-                <option >Fantascienza</option>
-                <option >Thriller</option>
-                <option >Azione</option>
-                <option>Romantico</option>
-            </select>
+        <div className="inputs-container">
+            <form className="form-search">
+                <input placeholder="Ricerca per Titolo" onChange={(e) => setInputSearch(e.target.value)} type="text" />
+            </form>
+            <div className="select-container">
+                <select onChange={(e) => setSelectGenre(e.target.value)}>
+                    <option value="">Categories</option>
+                    <option >Fantascienza</option>
+                    <option >Thriller</option>
+                    <option >Azione</option>
+                    <option>Romantico</option>
+                </select>
+            </div>
         </div>
         <div className="movies-container">
             {filteredMovies.map((movie, i) => {
@@ -53,10 +63,15 @@ function Main({ movies }) {
             })}
         </div>
         <form onSubmit={onCreatingMovie} className="add-movie">
-            <label>Insert Title</label>
-            <input value={createdTitle} onChange={(e) => setCreatedTitle(e.target.value)} />
-            <label>Insert Genre</label>
-            <input value={createdGenre} onChange={(e) => setCreatedGenre(e.target.value)} />
+            <h2>Create a new Movie</h2>
+            <div className="create-input-container">
+                <label>Insert Title</label>
+                <input value={createdTitle} onChange={(e) => setCreatedTitle(e.target.value)} />
+            </div>
+            <div className="create-input-container">
+                <label>Insert Genre</label>
+                <input value={createdGenre} onChange={(e) => setCreatedGenre(e.target.value)} />
+            </div>
             <button>Aggiungi</button>
         </form>
     </main>
