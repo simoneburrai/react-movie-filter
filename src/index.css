@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: "Quicksand", sans-serif;
+}
+
 button {
     cursor: pointer;
 }
@@ -16,6 +20,11 @@ header {
     font-size: 30px;
 }
 
+main {
+    background-image: url(assets/bg-main.jpg);
+    background-size: cover;
+    height: 100%;
+}
 
 .inputs-container {
     display: flex;
@@ -80,11 +89,13 @@ header {
 }
 
 .add-movie {
-    margin: 0 auto;
+    margin: 0 auto 50px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     width: 20%;
+    background-color: azure;
+    padding: 20px;
 }
 
 .add-movie h2 {
@@ -100,7 +111,7 @@ header {
     padding: 10px;
     border-radius: 10px;
     border: 0px;
-    background-color: aliceblue
+    background-color: white
 }
 
 .add-movie label {
